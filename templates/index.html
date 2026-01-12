@@ -8,7 +8,7 @@
     
 <h1 id = "title">Habit Tracker</h1>
 
-<div id = "login">
+<div id = "loginDiv" class = "homeDiv">
     <h1>Login</h1>
     <form>
         <input type="text" placeholder="Username" name = "username">
@@ -21,7 +21,7 @@
     </form>
 </div>
 
-<div id="register" style="display: none">
+<div id="registerDiv" style="display: none" class = "homeDiv">
     <h1>Register</h1>
     <form>
         <input type="text" placeholder="Username" name="username">
@@ -31,13 +31,13 @@
     </form>
 </div>
 
-<div id="forgot" style="display: none;">
+<div id="forgotDiv" style="display: none" class = "homeDiv">
     <h1>Forgot Password</h1>
-    <form>
+    <form id = "requestOTP">
         <input type="text" placeholder="Email ID" name="username">
         <button id="pwdButton" class = "button">Submit</button>
     </form>
-    <form id = "authenitcation">
+    <form id = "authentication">
         <input type="text" placeholder="OTP" name="otp">
         <button id="otpButton" class = "button">Submit</button>
     </form>
@@ -47,5 +47,6 @@
 
 </div>
 
+<script src = "../static/script.js"></script>
 </body>
 </html>
