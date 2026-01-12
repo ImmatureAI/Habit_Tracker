@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #131720;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#login, form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+#peripheral {
+    margin-top: -10px;
+    color: white;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    text-decoration: none;
+}
+
+a {
+    cursor: pointer;
+}
+h1 {
+    cursor: default;
+    color: white;
+}
+#title {
+    position: absolute; /* removes this out of the normal flow (flex display in this case) */
+    top: 20px;
+    left: 30px;
+    margin: 0px;  /* good practice */
+    font-size: 40px;
+}
+
+input {
+    all: unset;
+    background-color: #151f30;
+    font: 20px system-ui;
+    color: white;
+    height: 100%;
+    width: 300px;
+    padding: 15px;
+    border-radius: 20px;
+}
+
+.button{
+    margin-top: 10px;
+    width: 100px;
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #151f30;
+    cursor: pointer;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Habit Tracker</title>
+        <link rel = "stylesheet" href = "../static/style.css">
+    </head>
+<body>
+    
+<h1 id = "title">Habit Tracker</h1>
+
+<div id = "login">
+    <h1>Login</h1>
+    <form>
+        <input type="text" placeholder="Username" name = "username">
+        <input type="password" placeholder="Password" name = "password">
+        <div id = "peripheral">
+            <a id = "register">Register</a>
+            <a id = "pwd">Forgot</a>
+        </div>
+        <button id = "loginButton" class = "button">Login</button>
+    </form>
+</div>
+
+<div id="register" style="display: none">
+    <h1>Register</h1>
+    <form>
+        <input type="text" placeholder="Username" name="username">
+        <input type="text" placeholder="Password" name="password">
+        <input type="text" placeholder="Confirm password" name="confirmPassword">
+        <button id="registerButton" class = "button">Create</button>
+    </form>
+</div>
+
+<div id="forgot" style="display: none;">
+    <h1>Forgot Password</h1>
+    <form>
+        <input type="text" placeholder="Email ID" name="username">
+        <button id="pwdButton" class = "button">Submit</button>
+    </form>
+    <form id = "authenitcation">
+        <input type="text" placeholder="OTP" name="otp">
+        <button id="otpButton" class = "button">Submit</button>
+    </form>
+</div>
+
+<div id = "habitPage">
+
+</div>
+
+</body>
+</html>
