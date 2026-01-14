@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 from werkzeug.security import generate_password_hash, check_password_hash #for hashing and unhashing the password
 import sqlite3
 
@@ -8,6 +8,33 @@ app = Flask(__name__)
 @app.route("/")
 def start():
     return render_template('index.html') #render_template looks for index.html in templates/ folder and runs that
+
+
+@app.route('/login', methods = ['POST'])
+def login():
+    data = request.form
+    username = data['username']
+    password = data['password']
+
+    connection = sqlite3.connect('tracker.db')
+    cursor = connection.cursor()
+
+    cursor.execute('SELECT id, password FROM users WHERE username = ?', (username,))
+    hashpwd = cursor.fetchone()
+    connection.close()
+    
+    if hashpwd is None:
+        return "User doesn't exist! <a href = '/'>Go back</a>"
+
+    id = hashpwd[0]
+    pwd = hashpwd[1]
+    if check_password_hash(pwd, password):
+        session['id'] = id
+        session['user'] = username
+        return redirect('/dashboard')
+    else:
+        return "Wrong username or password! <a href = '/'>Go back</a>"
+    
 
 @app.route('/register', methods = ['POST'])
 def register():
@@ -28,7 +55,7 @@ def register():
         return redirect('/')
     except:
         connection.close()
-        return "Username already taken! <a href = '/>Go back</a>"
+        return "Username already taken! <a href = '/'>Go back</a>"
 
 
 @app.route('/forgotpwd', methods = ['POST'])
