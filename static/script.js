@@ -22,7 +22,7 @@ pwdlink.addEventListener('click', function(){
 });
 
 pwdButton.addEventListener('click', function(event){
-    event.preventDefault();
+    event.preventDefault(); // prevents the page from going back to the login
     otpReq.style.display = 'none';
     authReq.style.display = 'flex';
 });
