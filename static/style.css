@@ -9,6 +9,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: white;
 }
 
 .homeDiv, form {
@@ -19,7 +20,7 @@ body {
     gap: 15px;
 }
 
-#peripheral {
+#loginAlternative {
     margin-top: -10px;
     color: white;
     font-size: 15px;
@@ -65,4 +66,21 @@ input {
     border: none;
     background-color: #151f30;
     cursor: pointer;
+}
+
+#addNewHabit {
+    width: 50px;
+    height: 50px;
+    background-color: #151f30;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 35px;
+}
+
+.habbit {
+    background-color: #151f30;
+    display: flex;
+    justify-content: space-between;
 }
