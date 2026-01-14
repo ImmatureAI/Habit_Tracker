@@ -28,13 +28,13 @@ def register():
         return redirect('/')
     except:
         connection.close()
-        return "Username already taken! <a>Go back</a>"
+        return "Username already taken! <a href = '/>Go back</a>"
 
 
 @app.route('/forgotpwd', methods = ['POST'])
 def forgotPwd():
-    data = request.get_json()
-    mail = data['email']
+    data = request.form
+    username = data['username']
 
 if __name__ == '__main__':
     app.run(debug=True)
