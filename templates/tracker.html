@@ -2,15 +2,33 @@
 <html>
 
 <head>
-    <title>My Habits</title>
+    <title>Habit Tracker</title>
     <link rel="stylesheet" href="../static/style.css">
 </head>
 
 <body>
-    <div id="habitPage" class="homeDiv" style="display: flex;">
-        <h1>Welcome, {{ user }}!</h1>
-        <div id="addNewHabit">+</div>
+
+    <div id="habitHead" class="homeDiv" style="display: flex;">
+        <h1 style="text-transform: uppercase;">Welcome, {{ name }}!</h1>
+        <div id="addNewHabit" onclick="openModal()">+</div>
     </div>
+    
+    <div id = "habitList"></div>
+
+    <div id="habitModal" class="modalOverlay" style="display: none;">
+        <div class="modalContent">
+            <h2>New Habit</h2>
+            <form action="/addHabit" method="post">
+                <input type="text" name="habit" placeholder="eg. Reading" required autocomplete="off">
+                <div class="modalButtons">
+                    <button type="button" style="background-color: lightgreen;">Save</button>
+                    <button type="button" onclick="closeModal()" style="background-color: lightcoral;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src = "../static/auth.js"></script>
 </body>
 
 </html>
