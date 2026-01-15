@@ -4,6 +4,7 @@ import sqlite3
 
 
 app = Flask(__name__)
+app.secret_key = "SUPER_SECRET_KEY"
 
 @app.route("/")
 def start():
@@ -34,7 +35,11 @@ def login():
         return redirect('/dashboard')
     else:
         return "Wrong username or password! <a href = '/'>Go back</a>"
-    
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('tracker.html', name=session['user'])
+
 
 @app.route('/register', methods = ['POST'])
 def register():
@@ -58,10 +63,25 @@ def register():
         return "Username already taken! <a href = '/'>Go back</a>"
 
 
-@app.route('/forgotpwd', methods = ['POST'])
-def forgotPwd():
-    data = request.form
-    username = data['username']
+# @app.route('/forgotpwd', methods = ['POST'])
+# def forgotPwd():
+#     data = request.form
+#     username = data['username']
+
+@app.route('/addHabit')
+def addHabit():
+    data = request.form()
+    habit = data['habit']
+    connection = sqlite3.connect('tracker.db')
+    cursor = connection.cursor()
+    try:
+        cursor.execute('INSERT INTO habits (id, habit) VALUES (?, ?)', (session['id'], habit))
+        connection.commit()
+        connection.close()
+        return redirect('/dashboard')
+    except:
+        connection.close()
+        return "Something went wrong! <a href = '/dashboard'>Go back</a>"
 
 if __name__ == '__main__':
     app.run(debug=True)
