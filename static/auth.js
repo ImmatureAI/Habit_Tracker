@@ -1,3 +1,5 @@
+const url = 'http://127.0.0.1:5000'
+
 const habitList = document.getElementById('habitList');
 const add = document.getElementById('addNewHabit');
 
@@ -28,6 +30,9 @@ function startup(){
             checkBox.setAttribute('class', 'habitCheckbox');
             checkBox.setAttribute('id', `check_${habits[i][1]}_${j+1}`);
             checkBox.style.backgroundColor = "red";
+
+            checkBox.addEventListener('click', ()=>{check(checkBox.id)});
+
             checkContainer.appendChild(checkBox);
         }
         habit.appendChild(habitTitle);
@@ -43,3 +48,26 @@ function startup(){
     });
 }
 startup();
+
+async function check(id){
+    const checkBox = document.getElementById(id);
+    const check = checkBox.style.backgroundColor==='red' ? 'add' : 'remove';
+    if(checkBox.style.backgroundColor === 'red') checkBox.style.backgroundColor = 'green';
+    else checkBox.style.backgroundColor = 'red';
+    const habit_id = id.split('_')[1];
+    const date = parseInt(id.split('_')[2])
+    const response = await fetch(`${url}/habitCheck`, {
+        method : "Post",
+        headers : {
+            "Content-type" : "application/json"
+        },
+        credentials : 'include',
+        body : JSON.stringify({
+            habit_id : habit_id,
+            date : date,
+            check : check
+        })
+    })
+    const data = await response.json();
+    if(data['msg'] != 'success') alert('Something went wrong!!');
+}

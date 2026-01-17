@@ -4,13 +4,15 @@
 
 body {
     background-color: #131720;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     color: white;
+    padding-top: 40px;
+    overflow-x: hidden;
 }
 
 .homeDiv, form {
@@ -85,10 +87,10 @@ input {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    position: absolute;
-    top : 20px;
-    left : 30px;
-    right: 40px;
+    align-items: center;
+    width: 90%;
+    margin-bottom: 30px;
+    margin-top: -20px;
 }
 
 /* The dark background behind the popup */
@@ -180,4 +182,5 @@ input {
     background-color: #131720;
     width: 20px;
     height: 20px;
+    cursor: pointer;
 }
