@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash #for hashing and unhashing the password
 import sqlite3
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -38,7 +39,18 @@ def login():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('tracker.html', name=session['user'])
+    connection = sqlite3.connect('tracker.db')
+    cursor = connection.cursor()
+    date = datetime.now().strftime("%m")
+    query = '''
+        SELECT habits.habit, habit_log.date
+        FROM habits 
+        INNER JOIN habit_log ON habits.habit_id = habit_log.habit_id AND habits.id = habit_log.user_id
+        WHERE habits.id = ? AND habit_log.date LIKE ?
+    '''
+    cursor.execute(query, (session['id'],f"%-{date}-%"))
+    habits = cursor.fetchall()
+    return render_template('tracker.html', name=session['user'], habitList=habits)
 
 
 @app.route('/register', methods = ['POST'])
@@ -82,6 +94,28 @@ def addHabit():
     except:
         connection.close()
         return "Something went wrong! <a href = '/dashboard'>Go back</a>"
+
+@app.route('/habitCheck', methods = ["POST"])
+def habitCheck():
+    data = request.get_json()
+    
+    habit_id = data['habit_id']
+    date = data['date']
+    check = data['check']
+
+    currdate = datetime.now().strftime("%Y-%m")
+    currdate = f"{currdate}-{str(date).zfill(2)}" #zfill will make things like 5 as 05
+
+    conn = sqlite3.connect('tracker.db')
+    cursor = conn.cursor()
+    if check == 'add':
+        cursor.execute('INSERT INTO habit_log (user_id, habit_id, date) VALUES (?,?,?)', (session['id'], habit_id, currdate))        
+    else:
+        cursor.execute('DELETE FROM habit_log WHERE user_id = ? AND habit_id = ? AND date = ?', (session['id'], habit_id, currdate))
+    conn.commit()
+    conn.close()
+
+    return jsonify({"msg" : "success"})
 
 if __name__ == '__main__':
     app.run(debug=True)
