@@ -114,15 +114,19 @@ input {
     background-color: #151f30;
     padding: 30px;
     border-radius: 15px;
-    border: 1px solid #444;
     text-align: center;
-    width: 350px;
+    width: 30%;
+}
+
+input {
+    width: 90%;
 }
 
 .modal-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    gap: 30px;
 }
 
 .modal-buttons button {
@@ -132,7 +136,6 @@ input {
     color: white;
     cursor: pointer;
     font-size: 16px;
-    
 }
 
 #habitList {
