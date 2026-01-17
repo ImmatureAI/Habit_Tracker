@@ -15,7 +15,6 @@
         <input type="password" placeholder="Password" name = "password" required>
         <div id = "loginAlternative">
             <a id = "register">Register</a>
-            <a id = "pwd">Forgot</a>
         </div>
         <button id = "loginButton" class = "button" type="submit">Login</button>
     </form>
@@ -26,21 +25,7 @@
     <form action="/register" method="post">
         <input type="text" placeholder="Username" name="username" required autocomplete="off">
         <input type="password" placeholder="Password" name="password" required>
-        <input type="password" placeholder="Confirm password" name="confirmPassword" required>
         <button id="registerButton" class = "button" type="submit">Create</button>
-    </form>
-</div>
-
-<div id="forgotDiv" style="display: none" class = "homeDiv">
-    <h1>Forgot Password</h1>
-    <form id = "requestOTP" action="/getOTP" method="post">
-        <input type="text" placeholder="Username" name="username" required>
-        <button id="pwdButton" class = "button" type="submit">Submit</button>
-    </form>
-
-    <form id = "authentication" action="/verifyOTP" method="post">
-        <input type="text" placeholder="OTP" name="otp" required>
-        <button id="otpButton" class = "button" type="submit">Submit</button>
     </form>
 </div>
 

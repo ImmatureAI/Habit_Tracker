@@ -17,7 +17,7 @@ body {
 
 .centered_layout {
     justify-content: center !important;
-    padding-top: 0px !important;
+    padding-top: 0px !important;  /* !important forces the style */
 }
 
 .homeDiv, form {
@@ -34,7 +34,7 @@ body {
     font-size: 15px;
     display: flex;
     justify-content: space-between;
-    width: 300px;
+    width: 280px;
     text-decoration: none;
 }
 
