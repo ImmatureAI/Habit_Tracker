@@ -23,6 +23,10 @@ def login():
     connection = sqlite3.connect('tracker.db')
     cursor = connection.cursor()
 
+    month = datetime.now().month
+    month = str(month).zfill(2)
+    cursor.execute('DELETE FROM habit_log WHERE NOT date LIKE ?', (f'%-{month}-%',))
+
     cursor.execute('SELECT id, password FROM users WHERE username = ?', (username,))
     hashpwd = cursor.fetchone()
     connection.close()
