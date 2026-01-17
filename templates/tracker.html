@@ -31,8 +31,8 @@
 
     <script>
         const daysInMonth = {{numDays}};
-        const habits = {{habitList}};
-        const habitLog = {{habitDates}}
+        const habits = {{habitList | tojson}};
+        const habitLog = {{habitDates | tojson}}
     </script>
     <script src = "../static/auth.js"></script>
 </body>
