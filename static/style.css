@@ -197,3 +197,23 @@ input {
 .habitCheckbox.done {
     background-color: green;
 }
+
+.habitRingContainer {
+    position: relative;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.ring {
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    transition: stroke-dashoffset 0.3s;
+}
+
+.ringText {
+    position: absolute;
+    margin-right: 85px;
+}
