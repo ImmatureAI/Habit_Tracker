@@ -29,7 +29,6 @@ function startup(){
             const checkBox = document.createElement('div');
             checkBox.setAttribute('class', 'habitCheckbox');
             checkBox.setAttribute('id', `check_${habits[i][1]}_${j+1}`);
-            checkBox.style.backgroundColor = "red";
 
             checkBox.addEventListener('click', ()=>{check(checkBox.id)});
 
@@ -44,16 +43,15 @@ function startup(){
         let habitid = row[0];
         let date = parseInt(row[1].split('-')[2]);
         const checkBox = document.getElementById(`check_${habitid}_${date}`)
-        checkBox.style.backgroundColor = "green";       
+        checkBox.classList.add('done');  
     });
 }
 startup();
 
 async function check(id){
     const checkBox = document.getElementById(id);
-    const check = checkBox.style.backgroundColor==='red' ? 'add' : 'remove';
-    if(checkBox.style.backgroundColor === 'red') checkBox.style.backgroundColor = 'green';
-    else checkBox.style.backgroundColor = 'red';
+    const check = checkBox.classList.contains('done') ? 'remove' : 'add';
+    checkBox.classList.toggle('done');
     const habit_id = id.split('_')[1];
     const date = parseInt(id.split('_')[2])
     const response = await fetch(`${url}/habitCheck`, {

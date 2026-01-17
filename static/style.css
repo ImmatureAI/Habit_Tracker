@@ -117,7 +117,8 @@ input {
     padding: 30px;
     border-radius: 15px;
     text-align: center;
-    width: 30%;
+    width: 20%;
+    min-width: 300px;
 }
 
 input {
@@ -158,6 +159,8 @@ input {
     width: 100%;
     height: 120%;
     border-radius: 50px;
+    border: 1px solid #333;
+    cursor: default;
 }
 
 .habitTitle {
@@ -180,7 +183,12 @@ input {
 
 .habitCheckbox {
     background-color: #131720;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #333;
     cursor: pointer;
+}
+
+.habitCheckbox.done {
+    background-color: green;
 }
