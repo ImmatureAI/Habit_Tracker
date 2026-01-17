@@ -17,8 +17,8 @@ def initdb():
         CREATE TABLE IF NOT EXISTS habits(
             id INTEGER NOT NULL,
             habit TEXT NOT NULL,
-            habit_id INTEGER AUTOINCREMENT,
-            PRIMARY KEY (id, habit),
+            habit_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            UNIQUE(id, habit),
             FOREIGN KEY (id) REFERENCES users(id)
         )
     ''')
