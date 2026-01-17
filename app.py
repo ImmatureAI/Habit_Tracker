@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect, session, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash #for hashing and unhashing the password
-import sqlite3, calendar
+import sqlite3, calendar, os
 from datetime import datetime
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(BASE_DIR, 'tracker.db')
 
 app = Flask(__name__)
 app.secret_key = "SUPER_SECRET_KEY"
