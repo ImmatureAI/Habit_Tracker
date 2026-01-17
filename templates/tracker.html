@@ -21,13 +21,19 @@
             <form action="/addHabit" method="post">
                 <input type="text" name="habit" placeholder="eg. Reading" required autocomplete="off">
                 <div class="modalButtons">
-                    <button type="button" style="background-color: lightgreen;">Save</button>
+                    <button type="submit" style="background-color: lightgreen;">Save</button>
                     <button type="button" onclick="closeModal()" style="background-color: lightcoral;">Cancel</button>
                 </div>
             </form>
         </div>
     </div>
 
+
+    <script>
+        const daysInMonth = {{numDays}};
+        const habits = {{habitList}};
+        const habitLog = {{habitDates}}
+    </script>
     <script src = "../static/auth.js"></script>
 </body>
 
