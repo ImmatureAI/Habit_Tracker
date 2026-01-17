@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash #for hashing and unhashing the password
-import sqlite3
+import sqlite3, calendar
 from datetime import datetime
 
 
@@ -43,14 +43,25 @@ def dashboard():
     cursor = connection.cursor()
     date = datetime.now().strftime("%m")
     query = '''
-        SELECT habits.habit, habit_log.date
+        SELECT habits.habit_id, habit_log.date
         FROM habits 
         INNER JOIN habit_log ON habits.habit_id = habit_log.habit_id AND habits.id = habit_log.user_id
         WHERE habits.id = ? AND habit_log.date LIKE ?
     '''
     cursor.execute(query, (session['id'],f"%-{date}-%"))
+    habitDates = cursor.fetchall()
+
+    cursor.execute('SELECT habit, habit_id FROM habits WHERE id = ?', (session['id'],))
     habits = cursor.fetchall()
-    return render_template('tracker.html', name=session['user'], habitList=habits)
+    connection.close()
+
+    now = datetime.now()
+    days = calendar.monthrange(now.year, now.month)[1]
+    return render_template('tracker.html', 
+                           name=session['user'], 
+                           habitList = habits, 
+                           habitDates=habitDates, 
+                           numDays = days)
 
 
 @app.route('/register', methods = ['POST'])
@@ -80,9 +91,9 @@ def register():
 #     data = request.form
 #     username = data['username']
 
-@app.route('/addHabit')
+@app.route('/addHabit', methods = ['POST'])
 def addHabit():
-    data = request.form()
+    data = request.form
     habit = data['habit']
     connection = sqlite3.connect('tracker.db')
     cursor = connection.cursor()
